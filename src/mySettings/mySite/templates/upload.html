@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <title>Здати роботу</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}"> 
+
+</head>
+<body>
+    <div class="container">
+        <h1>Завантажте файл або введіть посилання</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <h2>Введіть своє прізвище та ім'я</h2>
+                <div class="entry">{{ form.text_field }}</div>
+            </div>
+
+            <div class="mb-3">
+                <h2>Оберіть свій клас</h2>
+                {{ form.my_choice }}
+            </div>
+
+            <div class="mb-3">
+                <h2>Оберіть файл</h2>
+                {{ form.file_field }}
+            </div>
+            <div class="mb-3">
+                <h2>Вставте url посилання</h2>
+                {{ form.link_field }}
+            </div>
+            <button type="submit" class="btn btn-primary">Здати роботу</button>
+        </form>
+    </div>
+
+</body>
+</html>
