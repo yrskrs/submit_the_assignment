@@ -24,7 +24,7 @@ def upload_file(request):
             os_name = platform.system()
             os_user = platform.uname
             browser = request.META.get('HTTP_USER_AGENT')
-            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            timestamp = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 
 
             with open('computer_info.txt', 'a') as f:
@@ -38,7 +38,7 @@ def upload_file(request):
             selected_choice = form.cleaned_data['my_choice']
 
             # Створюємо шлях до каталогу
-            today = timezone.now().date()
+            today = timezone.now().date().strftime("%d-%m-%Y")
             base_path = os.path.join('media', str(today), selected_choice, text_value)
             os.makedirs(base_path, exist_ok=True)
 
@@ -52,7 +52,7 @@ def upload_file(request):
             if link_value:
                 link_instance = UploadedLink.objects.create(link=link_value)
                 with open(os.path.join(base_path, 'link.txt'), 'a') as f:
-                    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    timestamp = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
                     f.write(f"[{timestamp}] {link_value}\n")                        
 
             return HttpResponse('Файл успішно завантажено або посилання збережено')
